@@ -1,6 +1,5 @@
-
 import React from 'react';
-import networkRailLogo from '../src/assets/network_rail.png';
+import networkRailLogo from '../assets/network_rail.png';
 
 const NetworkRailAttribution = () => {
     return (
