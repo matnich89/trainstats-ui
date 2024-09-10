@@ -1,5 +1,5 @@
 import './App.css';
-import NationalRailRealtime from "./NationalRailRealtime";
+import NationalRailRealtime from "./NationalRailRealTime/NationalRailRealtime";
 
 function App() {
   return (

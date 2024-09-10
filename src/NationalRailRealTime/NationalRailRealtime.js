@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from 'react'
-import RailDataInfoNote from "./RailDataIInfoNote";
-import NetworkRailAttribution from "./NetworkRailAttribution";
+import RailDataInfoNote from "../RailDataIInfoNote";
+import NetworkRailAttribution from "../NetworkRailAttribution/NetworkRailAttribution";
 
 const NationalRailRealtime = () => {
     const [data, setData] = useState(null);
     const [isConnected, setIsConnected ] = useState(false);
 
     useEffect(() => {
-        const socket = new WebSocket('ws://localhost:8080/trains');
+        const socket = new WebSocket('ws://localhost:8080/national');
 
         socket.onopen = () => {
             console.log('websocket open');
