@@ -1,9 +1,13 @@
 <script lang="ts">
     import NationalRailRealtime from './NationalRailRealtime.svelte';
+    export let data: {
+        wsUrl: string;
+    };
+
 </script>
 
 <main>
-    <NationalRailRealtime />
+    <NationalRailRealtime wsUrl={data.wsUrl} />
 </main>
 
 <style>
