@@ -18,7 +18,7 @@
 
     async function fetchConfig() {
         try {
-            const response = await fetch('/config.json');
+            const response = await fetch('/config/config.json');
             const config = await response.json();
             return config.VITE_WEBSOCKET_URL;
         } catch (err) {
@@ -26,6 +26,7 @@
             return null;
         }
     }
+
 
     onMount(async () => {
         wsUrl = await fetchConfig();
