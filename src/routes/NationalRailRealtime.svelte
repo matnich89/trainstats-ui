@@ -1,5 +1,4 @@
 <script lang="ts">
-    import "../app.css"
     import { onMount } from 'svelte';
     import RailDataInfoNote from "./RailDataInfoNote.svelte";
     import NetworkRailAttribution from "./NetworkRailAttribution.svelte";
@@ -18,7 +17,6 @@
     export let wsUrl: string;
 
     onMount(() => {
-
         if (!wsUrl) {
             error = "WebSocket URL is undefined";
             return;
@@ -68,8 +66,8 @@
     <p class="mb-4 text-lg">
         Connection status:
         <span class={isConnected ? "text-green-600" : "text-red-600"}>
-            {isConnected ? 'Connected' : 'Disconnected'}
-        </span>
+      {isConnected ? 'Connected' : 'Disconnected'}
+    </span>
     </p>
     {#if error}
         <p class="text-red-600 mb-4">{error}</p>

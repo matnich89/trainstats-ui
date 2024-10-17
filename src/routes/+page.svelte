@@ -3,7 +3,6 @@
     export let data: {
         wsUrl: string;
     };
-
 </script>
 
 <main>
