@@ -17,6 +17,7 @@
 
     onMount(() => {
         let wsUrl: string | undefined = import.meta.env.VITE_WEBSOCKET_URL;
+        console.log(wsUrl)
         if (!wsUrl) {
             error = "Could not connect"
             return;
