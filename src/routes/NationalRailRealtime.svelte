@@ -61,9 +61,6 @@
         Current Realtime National Rail Stats
     </h1>
     <p class="mb-4 text-lg">
-        WebSocket URL: {wsUrl || 'Loading...'}
-    </p>
-    <p class="mb-4 text-lg">
         Connection status:
         <span class={isConnected ? "text-green-600" : "text-red-600"}>
       {isConnected ? 'Connected' : 'Disconnected'}
