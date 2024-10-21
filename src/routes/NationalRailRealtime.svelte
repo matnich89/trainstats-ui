@@ -8,6 +8,9 @@
         cancelled_or_very_late: number;
         late: number;
         total: number;
+        on_time_percentage: number;
+        cancelled_or_very_late_percentage: number;
+        late_percentage: number;
     }
 
     let railData: RailData | null = null;
@@ -54,6 +57,10 @@
             socket.close();
         };
     });
+
+    function formatPercentage(value: number): string {
+        return value.toFixed(1) + '%';
+    }
 </script>
 
 <div class="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4">
@@ -63,8 +70,8 @@
     <p class="mb-4 text-lg">
         Connection status:
         <span class={isConnected ? "text-green-600" : "text-red-600"}>
-      {isConnected ? 'Connected' : 'Disconnected'}
-    </span>
+            {isConnected ? 'Connected' : 'Disconnected'}
+        </span>
     </p>
     {#if error}
         <p class="text-red-600 mb-4">{error}</p>
@@ -75,14 +82,17 @@
                 <div class="text-center">
                     <h2 class="text-xl font-semibold mb-2">On Time</h2>
                     <p class="text-3xl font-bold text-blue-600">{railData.on_time}</p>
+                    <p class="text-lg text-gray-600">{formatPercentage(railData.on_time_percentage)}</p>
                 </div>
                 <div class="text-center">
-                    <h2 class="text-xl font-semibold mb-2">Cancelled or Very Late</h2>
+                    <h2 class="text-xl font-semibold mb-2">Cancelled / V Late</h2>
                     <p class="text-3xl font-bold text-blue-600">{railData.cancelled_or_very_late}</p>
+                    <p class="text-lg text-gray-600">{formatPercentage(railData.cancelled_or_very_late_percentage)}</p>
                 </div>
                 <div class="text-center">
                     <h2 class="text-xl font-semibold mb-2">Late</h2>
                     <p class="text-3xl font-bold text-blue-600">{railData.late}</p>
+                    <p class="text-lg text-gray-600">{formatPercentage(railData.late_percentage)}</p>
                 </div>
                 <div class="text-center">
                     <h2 class="text-xl font-semibold mb-2">Total</h2>
