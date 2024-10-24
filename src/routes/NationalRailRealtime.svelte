@@ -56,10 +56,12 @@
 
 	const performanceDescription = `
         Performance scores are calculated using a weighted formula:
+        • On-time trains contribute positively to the score
         • Cancelled or very late trains count 2× against performance
         • Late trains count 1× against performance
-        • Final score is weighted sum divided by total trains
-        • Lower scores indicate better performance
+        • Final score is between 0-100, where:
+          - 100 is perfect (all trains on time)
+          - 0 is worst (all trains cancelled/very late)
     `.trim();
 
 	onMount(() => {
@@ -109,6 +111,14 @@
 
 	function formatPercentage(value: number): string {
 		return value.toFixed(1) + '%';
+	}
+
+	function getScoreColor(score: number): string {
+		if (score >= 90) return 'text-green-600';
+		if (score >= 80) return 'text-emerald-600';
+		if (score >= 70) return 'text-yellow-600';
+		if (score >= 60) return 'text-orange-600';
+		return 'text-red-600';
 	}
 </script>
 
@@ -197,16 +207,18 @@
 									</div>
 									<div>
 										<p class="text-sm text-green-600">Cancelled/V Late</p>
-										<p
-											class="font-semibold">{formatPercentage(railData.best_operator.cancelled_or_very_late_percentage)}</p>
+										<p class="font-semibold">{formatPercentage(railData.best_operator.cancelled_or_very_late_percentage)}</p>
 									</div>
 									<div>
 										<p class="text-sm text-green-600">Total Trains</p>
 										<p class="font-semibold">{railData.best_operator.total}</p>
 									</div>
 								</div>
-								<p class="text-sm text-green-600 mt-2">
-									Performance Score: {railData.best_operator.performance_score.toFixed(3)}
+								<p class="text-sm font-medium mt-2">
+									Performance Score:
+									<span class={getScoreColor(railData.best_operator.performance_score)}>
+										{railData.best_operator.performance_score.toFixed(1)}/100
+									</span>
 								</p>
 							</div>
 						</div>
@@ -228,16 +240,18 @@
 									</div>
 									<div>
 										<p class="text-sm text-red-600">Cancelled/V Late</p>
-										<p
-											class="font-semibold">{formatPercentage(railData.worst_operator.cancelled_or_very_late_percentage)}</p>
+										<p class="font-semibold">{formatPercentage(railData.worst_operator.cancelled_or_very_late_percentage)}</p>
 									</div>
 									<div>
 										<p class="text-sm text-red-600">Total Trains</p>
 										<p class="font-semibold">{railData.worst_operator.total}</p>
 									</div>
 								</div>
-								<p class="text-sm text-red-600 mt-2">
-									Performance Score: {railData.worst_operator.performance_score.toFixed(3)}
+								<p class="text-sm font-medium mt-2">
+									Performance Score:
+									<span class={getScoreColor(railData.worst_operator.performance_score)}>
+										{railData.worst_operator.performance_score.toFixed(1)}/100
+									</span>
 								</p>
 							</div>
 						</div>
