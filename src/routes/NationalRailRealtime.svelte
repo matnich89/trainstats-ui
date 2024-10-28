@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import RailDataInfoNote from './RailDataInfoNote.svelte';
 	import NetworkRailAttribution from './NetworkRailAttribution.svelte';
-	import helloKitty from '$lib/images/lol.png';
+	import helloKitty from '$lib/images/lol.mp4';
 
 	interface OperatorPerformance {
 		code: string;
@@ -145,7 +145,16 @@
 <div class="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4">
 
 	<div class="w-64 mb-4">
-		<img src={helloKitty} alt="Hello Kitty Train" class="w-full h-auto">
+		<video
+			autoplay
+			loop
+			muted
+			playsinline
+			class="w-full h-auto rounded-lg shadow-lg"
+		>
+			<source src="{helloKitty}" type="video/mp4">
+			Your browser does not support the video tag.
+		</video>
 	</div>
 
 	<div class="text-center mb-4">
