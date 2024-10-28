@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import RailDataInfoNote from './RailDataInfoNote.svelte';
 	import NetworkRailAttribution from './NetworkRailAttribution.svelte';
+	import helloKitty from '$lib/images/lol.png';
 
 	interface OperatorPerformance {
 		code: string;
@@ -142,6 +143,11 @@
 </style>
 
 <div class="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4">
+
+	<div class="w-64 mb-4">
+		<img src={helloKitty} alt="Hello Kitty Train" class="w-full h-auto">
+	</div>
+
 	<div class="text-center mb-4">
 		<h1 class="text-3xl font-bold mb-2">
 			Realtime National Passenger Train Stats
