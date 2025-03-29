@@ -1,4 +1,4 @@
-name: 'Trainstats Push'
+name: 'Trainstats Ui Merge'
 
 on:
   push:
