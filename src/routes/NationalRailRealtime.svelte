@@ -9,21 +9,25 @@
 		name: string;
 		on_time: number;
 		late: number;
-		cancelled_or_very_late: number;
+		cancelled: number;
+		very_late: number;
 		total: number;
 		on_time_percentage: number;
 		late_percentage: number;
-		cancelled_or_very_late_percentage: number;
+		cancelled_percentage: number;
+		very_late_percentage: number;
 		performance_score: number;
 	}
 
 	interface RailData {
 		on_time: number;
-		cancelled_or_very_late: number;
+		cancelled: number;
+		very_late: number;
 		late: number;
 		total: number;
 		on_time_percentage: number;
-		cancelled_or_very_late_percentage: number;
+		cancelled_percentage: number;
+		very_late_percentage: number;
 		late_percentage: number;
 		best_operator: OperatorPerformance | null;
 		worst_operator: OperatorPerformance | null;
@@ -58,11 +62,12 @@
 	const performanceDescription = `
         Performance scores are calculated using a weighted formula:
         • On-time trains contribute positively to the score
-        • Cancelled or very late trains count 2× against performance
+        • Cancelled trains count 3× against performance
+        • Very late trains count 2× against performance
         • Late trains count 1× against performance
         • Final score is between 0-100, where:
           - 100 is perfect (all trains on time)
-          - 0 is worst (all trains cancelled/very late)
+          - 0 is worst (all trains cancelled)
     `.trim();
 
 	onMount(() => {
@@ -177,16 +182,21 @@
 	{#if railData}
 		<div class="bg-white shadow-lg rounded-lg p-6 w-full max-w-4xl space-y-8">
 			<!-- Overall Stats -->
-			<div class="grid grid-cols-4 gap-4">
+			<div class="grid grid-cols-5 gap-4">
 				<div class="text-center">
 					<h2 class="stat-label">On Time</h2>
 					<p class="stat-value">{railData.on_time}</p>
 					<p class="stat-percentage">{formatPercentage(railData.on_time_percentage)}</p>
 				</div>
 				<div class="text-center">
-					<h2 class="stat-label">Cancelled / V Late</h2>
-					<p class="stat-value">{railData.cancelled_or_very_late}</p>
-					<p class="stat-percentage">{formatPercentage(railData.cancelled_or_very_late_percentage)}</p>
+					<h2 class="stat-label">Cancelled</h2>
+					<p class="stat-value">{railData.cancelled}</p>
+					<p class="stat-percentage">{formatPercentage(railData.cancelled_percentage)}</p>
+				</div>
+				<div class="text-center">
+					<h2 class="stat-label">Very Late</h2>
+					<p class="stat-value">{railData.very_late}</p>
+					<p class="stat-percentage">{formatPercentage(railData.very_late_percentage)}</p>
 				</div>
 				<div class="text-center">
 					<h2 class="stat-label">Late</h2>
@@ -217,8 +227,12 @@
 										<p class="font-semibold">{formatPercentage(railData.best_operator.late_percentage)}</p>
 									</div>
 									<div>
-										<p class="text-sm text-green-600">Cancelled/V Late</p>
-										<p class="font-semibold">{formatPercentage(railData.best_operator.cancelled_or_very_late_percentage)}</p>
+										<p class="text-sm text-green-600">Cancelled</p>
+										<p class="font-semibold">{formatPercentage(railData.best_operator.cancelled_percentage)}</p>
+									</div>
+									<div>
+										<p class="text-sm text-green-600">Very Late</p>
+										<p class="font-semibold">{formatPercentage(railData.best_operator.very_late_percentage)}</p>
 									</div>
 									<div>
 										<p class="text-sm text-green-600">Total Trains</p>
@@ -250,8 +264,12 @@
 										<p class="font-semibold">{formatPercentage(railData.worst_operator.late_percentage)}</p>
 									</div>
 									<div>
-										<p class="text-sm text-red-600">Cancelled/V Late</p>
-										<p class="font-semibold">{formatPercentage(railData.worst_operator.cancelled_or_very_late_percentage)}</p>
+										<p class="text-sm text-red-600">Cancelled</p>
+										<p class="font-semibold">{formatPercentage(railData.worst_operator.cancelled_percentage)}</p>
+									</div>
+									<div>
+										<p class="text-sm text-red-600">Very Late</p>
+										<p class="font-semibold">{formatPercentage(railData.worst_operator.very_late_percentage)}</p>
 									</div>
 									<div>
 										<p class="text-sm text-red-600">Total Trains</p>
